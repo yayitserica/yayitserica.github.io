@@ -1,6 +1,0 @@
-Excerpts from my httpd.conf that is relevent to webcal.
-
-   httpd.conf-mod_perl-cookie:   
-   httpd.conf-mod_perl-htpassword: 
-   httpd.conf-no-mod_perl:
-
