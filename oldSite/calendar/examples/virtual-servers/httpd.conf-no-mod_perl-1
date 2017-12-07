@@ -1,0 +1,86 @@
+#----------------------------------------------------------
+# section relevent to webcal
+#
+# WebCalendar is installed in /virtual/www/webcal/bin/
+#
+# In this example, cookie auth is selected. All virtual
+# servers uses the same url to access webcal.
+#
+#----------------------------------------------------------
+
+ScriptAlias /y/ "/virtual/www/webcal/bin/"
+<Directory "/virtual/www/webcal/bin/">
+        AllowOverride All
+        Options None
+        Order allow,deny
+        Allow from all
+	Options FollowSymLinks
+</Directory>
+
+#
+# webcal icons is accessed via url /i/
+#
+Alias /i/ "/virtual/www/htdocs/i/"
+<Directory "/virtual/www/htdocs/i">
+    Options Indexes MultiViews
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+#-------------------------------------------------------------------------
+#
+# Section relevent to virtual server setup. In this example, one
+# host is assigned two IPs: 146.6.139.60 and 128.83.133.228. 
+# Three names is aliased to 146.6.139.60:
+#      linux91, vtest1, vtest2 
+# We have three virtual servers set up on this IP.
+#
+# We also set up a virtual server using the 128 IP, the
+# servername is nicolas
+#
+#-------------------------------------------------------------------------
+
+BindAddress *
+port 80
+
+NameVirtualHost 146.6.139.60
+
+<VirtualHost 146.6.139.60>
+    ServerAdmin webcal@math.utexas.edu
+    DocumentRoot /virtual/www/htdocs
+    ServerName linux91.ma.utexas.edu
+    ErrorLog logs/error_log
+    CustomLog logs/access_log common
+</VirtualHost>
+
+<VirtualHost 146.6.139.60>
+    ServerAdmin webcal@math.utexas.edu
+    DocumentRoot /virtual/www/htdocs
+    ServerName vtest1.ma.utexas.edu
+    ErrorLog logs/vtest1-error_log
+    CustomLog logs/vtest1-access_log common
+</VirtualHost>
+
+<VirtualHost 146.6.139.60>
+    ServerAdmin webcal@math.utexas.edu
+    DocumentRoot /virtual/www/htdocs
+    ServerName vtest2.ma.utexas.edu
+    ErrorLog logs/vtest2-error_log
+    CustomLog logs/vtest2-access_log common
+</VirtualHost>
+
+<VirtualHost 128.83.133.228>
+    ServerAdmin webcal@math.utexas.edu
+    DocumentRoot /virtual/www/htdocs
+    ServerName nicolas.ma.utexas.edu
+    ErrorLog logs/nicolas-error_log
+    CustomLog logs/nicolas-access_log common
+</VirtualHost>
+
+<VirtualHost _default_:*>
+</VirtualHost>
+
+
+
+

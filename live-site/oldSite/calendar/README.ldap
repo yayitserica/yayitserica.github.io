@@ -1,0 +1,134 @@
+To authenticate using ldap, you need to
+
+ 1) install perl module 
+      Net::LDAP;
+    and/or write up a real cryption module. A good example is in
+    webcalCrypt_CBC.pm
+ 
+
+ 2) uncomment the following 5 lines in webcalContactDB.pm
+
+
+#    if($backend =~ /ldap/) {
+#        use webcalContactDB_ldap;
+#        my $total = &webcalContactDB_ldap::LoadAddressBook(@_);
+#        return (1,$total);
+#    }
+
+
+ 3) uncomment the following 4 lines in webcalAuth.pm 
+
+#    if$backend =~ /ldap/) {
+#        use webcalAuth_ldap;
+#        $handle = $webcalAuth_ldap::handle;
+#    } else 
+
+
+ 4) Change a few variables in webcalConfig.pm
+
+Here is a sample configuration.
+
+#---------------------------------------------------------------------------
+# Authentication backend. We support
+#  default  -- internal password authentication
+#  ldap     -- auth against a ldap server  
+
+'authbackend' => 'ldap',
+
+# address book lookup   
+# default  -- internal table
+# ldap     -- lookup addressbook from a ldap server  
+
+'contactdb' => 'ldap',
+
+# ldap configuration variables, used when
+# ldap auth backend or ldap contactdb is selected. This
+# variable holds an anonymous hash table.
+
+ldap_conf' => {
+    # server is your ldap server. server_options are options
+    # you want to pass to Net::LDAP constructor. See  Net::LDAP
+    # documentation for info about all options.
+
+    'server'          => 'your_ldap_server.your_domain.com',
+    'server_options'  => [
+			   'port'    => 389,
+			   'version' => 3,
+			   'onerror' => undef,
+			   'async'   => 1,
+			   'debug'   => 0,
+			   ],
+
+    # control whether to use TLS (transport layer security), which 
+    # provides an encrypted connection. Note, you must connect use
+    # LDAPv3,  your ldap server must be configured to advertise
+    # LDAP_EXTENSION_START_TLS in order for this to work.
+    
+    'tls'             => 1,
+    'tls_options'     => [
+			   # see Net::LDAP documentation for
+			   # a list of options and examples.
+			   verify  => 'require',
+			   cafile  => '/etc/ldap/ca-cert.pem',
+			   ],
+
+    # common searching options. See Net::LDAP man page for
+    # a complete list of search related options and attributes.
+
+    'search_options' => [
+			  'base'      => 'ou=People,dc=WHAT,dc=ETC,dc=ETC',
+			  'scope'     => 'sub',     # base | sub | one
+			  'defef'     => 'find',    # never | search | find | always
+			  'sizelimit' => 100,       # 0 for unlimited
+			  ],
+
+    # fields used to search for user email
+
+    'user_search_fields' => ['cn', 'mail', 'sn', 'uid', 'departmentNumber'],
+
+    # attribute used to match and authenticate. 
+
+    'auth_attribute' => 'uid',
+
+    # config options. Whether or not to  automatically create calendar
+    # for new authenticated users.
+    #
+    #  0 or undef:  Will not create calendar automatically.
+    #  positive:    Will automatically create a calendar for a succesfully
+    #               authenticated user, provided that &GetUserInfo can obtain
+    #               the email address of the user.
+    # negative:     Will not create the calendar, but will post the signup
+    #               screen asking the user to confirm calendar setup.
+    #
+    'autoCreateCalendar'     => 1,
+
+    # config options. whether or not to allow users to change their password.
+    # It require a coorporating ldap server to work. If change password is
+    # allowed, you need to supply the rootdn in the ldap_rootdn_info hash.
+    # Not a good idea, but ... 
+
+    'disallowPasswordChange' => 1,
+
+    # Info for ldap rootdn. Please leave the password null.
+    # They're only used to replace user password by admin users 
+    # when change password is enabled. 
+
+    'ldap_rootdn_info' => {
+	 'ldap_root_dn'       => 'cn=Manager,dc=WHATEVER,dc=ETC,dc=ETC',
+	 'ldap_root_password' => '',
+	 },
+ },
+# password encryption data. Info on how to encrypt/decrypt passwords. 
+# They're used in webcalCrypt_CBC.pm.
+#
+# If you write you own encryption module, it is a good idea
+# to put the configuration variable in this hash table.
+#
+# Encryption is not needed by the default unix-password authentication.
+#
+'encryption'=>{
+	  'keyfile' => '/var/tmp/wcalkeyfile',
+	  'cipher'  => 'Blowfish',
+     },
+# 
+#---------------------------------------------------------------------------

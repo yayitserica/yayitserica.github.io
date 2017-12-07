@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+#
+# create a password entry for a user
+
+$name = $ARGV[0];
+$pswd = $ARGV[1];
+$salt = $ARGV[2];
+
+if( ! $name or ! $pswd) {
+  print "Usage: $0 name password\n";
+  exit 1;
+}
+
+if( $salt eq "" ) {
+ srand(time()^($$ +($$<<15)));
+ $tmp=int(rand(1000));
+} else { $tmp = $salt;}
+$paswd= crypt($pswd,"$tmp");
+print "$name:$paswd\n";
+
+

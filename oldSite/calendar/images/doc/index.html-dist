@@ -1,0 +1,11 @@
+<HTML>
+<TITLE></TITLE>
+<body onload="javascript:document.location.replace('doc/index.html')"> 
+
+<br><br>
+You're being redirected to your 
+<a href="doc/index.html">local webcal documentation</a>.
+
+</body>
+</HTML> 
+

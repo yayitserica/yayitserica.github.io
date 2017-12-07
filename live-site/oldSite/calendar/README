@@ -1,0 +1,35 @@
+
+Web Calendar 2.9.0
+
+    Web Calendar is a full featured web based calendar
+    system. It is an apache/mod_perl application and can
+    be run as a CGI application on other webservers.
+
+    WebCalendar supports the standard calendar editing, 
+    searching and popup/blinking/email reminders, plus 
+    a lot more ...
+
+    Web Calendar is known to work under Linux, Solaris,
+    Windows98, Windows2000, WindowsNT, WindowsXP, MacOS X.  
+
+    See FEATURES for addition info.
+
+    See INSTALL for installation instructions.
+
+    See COMMAND for info about adding events using the command line.
+
+    See images/doc/index.html for more info.
+
+
+    See APACHE2+MOD_PERL2 if you run apache2+mod_perl2
+  
+If you think webcal may benefit others, please help by
+spreading the words. The only public channel available
+currently is webcalendar's project page on Freshmeat. You
+are more than welcome to post your comments, or tell your
+story there.
+
+ http://freshmeat.net/projects/web-calendar/?topic_id=130    
+
+Thank you, and enjoy webCalendar!
+

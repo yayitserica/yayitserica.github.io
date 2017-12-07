@@ -1,0 +1,456 @@
+<HTML><HEAD><TITLE>WebCalendar Manual: </TITLE>
+<META Name="description" Content="webcal: web-based calendaring and scheduling system">  
+<META Name="keywords" Content="webCalendar, webcal, Calendar Server, netcalendar, net calendar net-calendar,online calendar, real-time calendar, online diary system, online address book, mod_perl application, group calendar, team calendar, family calendar, event publication, tasks manager, scheduling service, calendar service,  business calendar, open source calendar"> 
+<STYLE TYPE="text/css">
+    h2 { color:#333333; font-weight:heavy;font-family:arial}
+    .nav {font-size:x-mall;}
+    .nav:hover { color:red; font-weight:bold; background-color: green;}
+    .nav:active { color:red; background-color: green; font-decoration:none;}
+    .bq { color:#cc0000;} 
+</STYLE>
+</HEAD>
+<!--- This file is auto generated, please do not edit -->
+<BODY background="img/bg19.gif" bgcolor=#ffffff>
+
+<table border=0 cellspacing=0 cellpadding=0>
+ <tr><td align=left>
+    <table border=0 cellspacing=0 cellpadding=0>
+       <tr valign=bottom><td width=138 rowspan=3><img src="img/wcalicon.gif" border=0 width=138 height=93></td>
+           <td nowrap align=left width=600>
+<img src="img/webcalendar.gif" border=0 width=331 height=47>
+<img src="img/version.gif" border=0 width=125 height=30>
+<a href="http://www.lousapparel.com"><img src="img/spacer.gif" border=0 width=1 height=1><a>
+</td>
+       </tr>
+       <tr height=8><td height=8><img src="img/sbar.gif" width=600 height=8></td>
+       </tr>
+       <tr><td><img src="img/spacer.gif" width=1 height=8></td>
+       </tr>
+    </table>
+ </td><td>&nbsp;</td></tr>
+</table>
+
+<table border=0 cellspacing=0 cellpadding=0>
+   <tr>
+       <td valign=top><img src="img/spacer.gif" width=128 height=30 border=0><br>
+<!-- navigation table -->
+<div id="slide" style="position:absolute;top:140;left:2;">
+<table border=0>
+<tr><td nowrap><font size=2><a class="nav" href="index.html"><b>Home</b></a></font></td></tr>
+<tr><td nowrap><font size=2><a class="nav" href="features.html">Features</a></font></td></tr>
+<tr><td nowrap><font size=2><a class="nav" href="download.html">Download</a></font></td></tr>
+<tr><td nowrap><font size=2><a class="nav" href="install/index.html"><b>Installation</b></a></font></td></tr>
+<tr><td nowrap><font size=2><a class="nav" href="run.html">CGI options</a></font></td></tr>
+<tr><td nowrap><font size=2><a class="nav" href="try.html">Try it out</a></font></td></tr>
+<tr><td nowrap><font size=2>FAQ</font></td></tr>
+<tr><td nowrap><font size=2><a class="nav" href="manual/index.html"><b>User's Guide</b></a></font></td></tr>
+</table>
+</div>
+<!-- end navigation table -->
+</td><td valign=top><p><p>
+
+
+<script language="JavaScript" src="misc/javascript.js"></script>
+
+<h2><font color=#aaaaaa>&#171;</font> FAQ <font color=#aaaaaa>&#187;</font></h2>
+
+1. <a href="#a1"> How do I publish a calendar on the internet? </a><br>2. <a href="#a2"> How do I customize calendar header? </a><br>3. <a href="#a3"> How to disallow anonymous users from creating calendars? </a><br>4. <a href="#a4"> How to assign calendar administrators? </a><br>5. <a href="#a5"> How to enable/disable document upload? </a><br>6. <a href="#a6"> Can I enter events using the command line? </a><br>7. <a href="#a7"> Is it possible to  batch create multiple calendars? </a><br>8. <a href="#a8"> Are there plans to add RDBMS support? </a><br>9. <a href="#a9">  Can I synchronize events with my Palm Pilot? </a><br>10. <a href="#a10">  Can I link a document to an event? </a><br>11. <a href="#a11">  How do I add icons to my calendar? </a><br>12. <a href="#a12">  The script is working, but no icons were pulled up, why? </a><br>13. <a href="#a13"> How do I broadcast an event to all calendars? </a><br>14. <a href="#a14"> I get a 'not a valid word' error when creating a calendar. What is wrong? </a><br>15. <a href="#a15"> How to use Cascading Style Sheets (CSS) in my calendar? </a><br>16. <a href="#a16"> How do I embed a small month calendar in a html page? </a><br>17. <a href="#a17"> Is there a way to reject events from a corporate calendar? </a><br>18. <a href="#a18"> How do I tell if webcal is running under mod_perl? </a><br>19. <a href="#a19"> Can one subscribe a calendar to receive email reminders? </a><br>20. <a href="#a20"> What are "Virtual Calendar Groups" for? </a><br>
+<br><br>
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a1"><b class="bq">Q1. How do I publish a calendar on the internet?</b><br><p>
+
+<blockquote> 
+By default, webCalendar requires authentication when accessing a calendar.
+This means a user has to login to view a calendar. To bypass the authentication
+check, append <b>anonymous=1</b> to the cgi query string. This option
+installs the browser with a special anonymous identity which enables the user
+to view the relevent calendar. Both public and private calendars can
+be published this way. For example, the following URL 
+publish the calendar for classroom <b>class10</b>.
+<p>
+<font size=-1><a href="http://webcal.ma.utexas.edu/webcal/wcal?w=class10&anonymous=1&listview=1">
+http://webcal.ma.utexas.edu/webcal/wcal?w=class10&anonymous=1&listview=1</a></font>
+<p>
+<font size=-1><a href="http://webcal.ma.utexas.edu/webcal/wcal?w=class10&anonymous=1">
+http://webcal.ma.utexas.edu/webcal/wcal?w=class10&anonymous=1</a></font>
+<p>
+The special anonymous user cannot edit any calendars.
+
+<p> 
+There are a dozen or so cgi options that can be used to customize the look
+of your calendar. 
+</blockquote> 
+
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a2"><b class="bq">Q2. How do I customize calendar header?</b><br><p> 
+<blockquote> 
+To customize the default calendar header for a site,  define
+the variable <b>headerCode</b>  in
+site configuration file <i>webcalConfig.pm</i>. The header code
+must be valid html code. The following special tags may be used.
+<table border=1><tr>
+<td>&lt;logo&gt;</td><td> Replaced by the default calendar logo</td></tr>
+<td>&lt;version&gt;</td><td> Replaced by webcal's version number </td></tr>
+<td>&lt;calendar_selector&gt;</td><td> Replaced by the calendar selection menu or entry</td></tr>
+<td>&lt;calendar_title&gt;</td><td> Replaced by calendar's descriptive name or owner's name or calendar name</td></tr>
+<td>&lt;category_filter&gt;</td><td> Replaced by category filter menu</td></tr>
+<td>&lt;logout&gt;</td><td> Replaced by the logout button</td></tr>
+</table>
+<p>
+To customize header for an individual calendar, go to the option screen and enter
+the header/footer html code in the corresponding textarea and enter <b>4</b>
+in the entry box about the header code textarea. Here is an example
+<pre>
+&lt;table width="100%"&gt;&lt;tr&gt;
+    &lt;td&gt;&lt;img src="/i/galaxy.gif" width=203 height=80 border=0&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;calendar_title&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;logout&gt;&lt;/td&gt;
+ &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+and here is the resulting header.<br>
+<img src="img/sample_header.gif"  width=628 height=78 border=0>
+<p>
+The same procedure is also valid for customizing calendar footer. 
+
+</blockquote> 
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a3"><b class="bq">Q3. How to disallow anonymous users from creating calendars?</b><br><p> 
+
+<blockquote> 
+In webcalConfig.pm, set the variable <code>'create'</code> to <code>0</code>. 
+If calendar creation is disabled, only calendar administrators can create
+new calendars from within his admin screen. It is a good idea to create and 
+assign an admin calendar first before disabling anonymous calendar creation.
+
+</blockquote> 
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a4"><b class="bq">Q4. How to assign calendar administrators?</b><br><p>
+<blockquote> 
+In webcalConfig.pm, the variable <code>theAdministrator</code> hold a list of comma separated
+calendar names, those users are calendar administrators. To assign calendar
+administrator, simply insert the calendar name into this list.
+</blockquote> 
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a5"><b class="bq">Q5. How to enable/disable document upload?</b><br><p>
+<blockquote> 
+In webcalConfig.pm, modify the following variables
+<pre>
+
+      'allowImageUpload'    => 0,
+      'maximumImageFileSize'=> 100000,              
+      'reviewImageUpload'   => 1,
+      'ImageUploadReviewer' => 'a/b,c/d', 
+
+</pre>
+as needed.  If <code>reviewImageUpload</code> is set to 1, user uploads will
+be held till approved by upload reviewers. <code>ImageUploadReviewer</code> 
+hold a list of upload reviewers.
+</blockquote> 
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a6"><b class="bq">Q6. Can I enter events using the command line?</b><br><p>
+
+<blockquote> 
+The distribution contains a file <code>webcal_cmd.pl</code>
+that can be used to add/get events from the command line.
+You need to install this file somewhere in your command
+search path. 
+</blockquote> 
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a7"><b class="bq">Q7. Is it possible to  batch create multiple calendars?</b><br><p>
+
+<blockquote> 
+Yes if you're running webcal on a  <font color=#009900>Unix</font> server.
+There is a perl script <code>wcaladd</code> in the distribution. You need
+to edit the first 2 variables (the owner of your webserver) before using it. 
+<p>
+<code>wcaladd</code> is a script that create a calendar on the command line.
+You can use it, together with a shell script to batch create calendars. For
+example, the following script create 100 calendars, <i>test100</i>
+through <i>test199</i>.
+<font color=blue>
+<pre> 
+   i=100; 
+   while [ $i -lt 200 ] ; 
+   do 
+    ./wcaladd -u test$i -p pass$i -email test$i\@a.com \
+       -spool /var/www/webcal/spool
+    i=`expr $i + 1`
+   done
+</pre>
+</font> 
+</blockquote> 
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a8"><b class="bq">Q8. Are there plans to add RDBMS support?</b><br><p>
+<blockquote> 
+No. Some features in webcal are hard, if not impossible,
+to translate to database queries. RDBMS support requires major
+overhull of the current code.
+</blockquote> 
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a9"><b class="bq">Q9.  Can I synchronize events with my Palm Pilot?</b><br><p>
+
+<blockquote> 
+You cannot. 
+</blockquote> 
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a10"><b class="bq">Q10.  Can I link a document to an event?</b><br><p>
+<blockquote> 
+Yes.  You can either upload the document to your webserver, or privide
+a URI for your document.  Please note that document uploading is controlled
+by a site configuration variable and maybe disabled by your system administrator.
+<p>
+The <b>URL</b> field on the event editor takes multiple entries separated
+by spaces.  For a uploaded document, you can use <code>^o^/document_name</code>
+or its full URL to link to it. For other document accessible on the internet, you have
+to specify its full URL to link to it. 
+<p>
+One of the following icons is used to link to your document. 
+It will be displayed near the event title. Click on the icon
+will open your document in a separate browser window. <br>
+<table border=0><tr><td nowrap>
+<img src="img/url.gif"  width=20 height=9 border=0>
+<img src="img/img.gif"  width=20 height=9 border=0>
+<img src="img/pdf.gif"  width=20 height=9 border=0>
+<img src="img/ps.gif"   width=20 height=9 border=0>
+<img src="img/rtf.gif"  width=20 height=9 border=0>
+<img src="img/mp3.gif"  width=20 height=9 border=0>
+<img src="img/mpeg.gif" width=20 height=9 border=0>
+<img src="img/audio.gif" width=20 height=9 border=0>
+<img src="img/video.gif" width=20 height=9 border=0>
+<img src="img/qtime.gif" width=20 height=9 border=0>
+<img src="img/flash.gif" width=20 height=9 border=0>
+<img src="img/real.gif" width=20 height=9 border=0>
+<img src="img/tex.gif"  width=20 height=9 border=0>
+<img src="img/xls.gif"  width=20 height=9 border=0>
+<img src="img/ppt.gif"  width=20 height=9 border=0>
+<img src="img/doc.gif"  width=20 height=9 border=0>
+<img src="img/dvi.gif"  width=20 height=9 border=0>
+<img src="img/zip.gif"  width=20 height=9 border=0>
+</td></tr></table>
+
+</blockquote> 
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a11"><b class="bq">Q11.  How do I add icons to my calendar?</b><br><p>
+
+<blockquote> 
+First, you system or calendar administrator has to enable
+image upload at your site. To see whether document upload is enabled,
+go to an event editor, if you see a small 
+<font size=1 color=blue> Image Upload</font> below the <b>What</b> label,
+document upload is allowed. However, a review policy is most likely
+enforced for image uploads. You can upload icons, but it won't show up
+until someone at your site approves them.
+
+<p> Once you've upload a set if icons, and they've been approved by your
+site administrator. You can use them in your events. A link
+<u style="color:green;background-color:#cccc00"><font size=1>Usable Images</font></u>
+should be displayed near the event title and event detail box. Click on
+that will pops up a window to let you 
+<a href="Javascript:sp('img/icon.gif')">select one or more icons.</a> 
+
+</blockquote> 
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a12"><b class="bq">Q12.  The script is working, but no icons were pulled up, why?</b><br><p>
+
+<blockquote> 
+Check the variables
+<pre> 
+      'fimgdirurl'=>"...",
+      'imgdirurl'=>"...",
+</pre>
+in webcalConfig.pm, see if you can retrieve anything using a browser from 
+the URL <code>fimgdirurl</code>. If not, you need to reconfigure your webserver, or
+copy the image directory to somewhere under your webserver's main documentation
+tree; and modify the two variables accordingly.
+
+<p>
+One common problem is that the image directory is under your <code>/cgi-bin</code>
+subtree, which is not allowed by some webservers.
+
+</blockquote> 
+
+<!------------ ---------------  ---------------------------------  --------->
+
+<a name="a13"><b class="bq">Q13. How do I broadcast an event to all calendars?</b><br><p>
+
+<blockquote> 
+Create a calendar and declare it as a
+ <a href="Javascript:sp('misc/corporate_calendar.html')">corporate calendar</a> 
+in <code>webcalConfig.pm</code>. Event added to a corporate calendar is 
+simultaneously inserted to all calendars.
+</blockquote> 
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a14"><b class="bq">Q14. I get a 'not a valid word' error when creating a calendar. What is wrong?</b><br><p>
+
+<blockquote> 
+Most likely your webserver cannot write to the calendar spool directory. Make
+sure your webserver owns the spool directory. 
+</blockquote> 
+
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a15"><b class="bq">Q15. How to use Cascading Style Sheets (CSS) in my calendar?</b><br><p>
+
+<blockquote> 
+If you want to customize your style sheet, go to
+the <b>options</b> screen and click on the <i>Create Font Style</i>
+link on the navigation bar. The CSS dialogue window will pop up.
+At the bottom of the CSS dialogue, there is a link that let you
+customize a personal style sheet.
+
+<p>
+You can define new CSS classes using the CSS dialogue. Your new 
+CSS classes will appear in the <b>Font</b> menu on the event
+editor to let you select a CSS class for individual events.
+</blockquote> 
+
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a16"><b class="bq">Q16. How do I embed a small month calendar in a html page?</b><br><p> 
+
+<blockquote> 
+Use the &lt;iframe&gt; tag. This will only work with recent browsers,
+like mozilla, opera, netscape6 and IE5.
+<p>
+You need to pass webcal at least the following args:
+<pre>
+   c=navigation_table&w=CALENDAR_NAME&anonymous=1&width=WIDTH&height=HEIGHT  
+</pre>
+where CALENDAR_NAME is the name of your calendar, WIDTH and HEIGHT are the
+size of small month calendar. 
+A few additional args maybe passed to webcal. They are
+
+<table border=1><tr>
+<td><code>cellcolor=color</code></td><td> Specify the background color for weekday name cells.</td></tr>
+<td><code>gridcolor=color</code></td><td> Specify the grid line color.</td></tr>
+<td><code>bgcolor=color</code></td><td> Specify the background color.</td></tr>
+<td><code>noarrow=1</code></td><td> Disable the two month navigation arrows.</td></tr>
+</table> 
+
+Colors are specified by name, such as <b>red</b> or by url
+encoded #rrggbb representation, such as <b>%23ff0000</b>. Here
+<i>%23</i> is the hex code for the # mark.
+
+<p>
+
+Here is the sample html code.
+<font size=2>
+<pre>
+&lt;iframe 
+ src="http://path_to_webcal_cgi?c=navigation_table&w=calendar_name&anonymous=1&width=130&height=120"
+ scrolling=no width=160 height=150 frameborder=0&gt;
+&lt;/iframe&gt;
+</pre>
+</font>
+
+<table border=0 cellspacing=0 cellpading=0><tr>
+<td width=200 height=160 align=center>
+<iframe src="http://webcal.ma.utexas.edu/webcal/wcal?c=navigation_table&w=Demo&anonymous=1&width=130&height=120"
+ scrolling=no width=160 height=150 frameborder=1></iframe>
+</td>
+<td width=200 height=160 align=center>
+<iframe src="http://webcal.ma.utexas.edu/webcal/wcal?c=navigation_table&w=Demo&anonymous=1&width=130&height=120&cellcolor=red&gridcolor=green&bgcolor=yellow&noarrow=1"
+ scrolling=no width=160 height=150 frameborder=1></iframe>
+</td>
+</tr></table>
+</blockquote> 
+
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a17"><b class="bq">Q17. Is there a way to reject events from a corporate calendar?</b><br><p>
+
+<blockquote> 
+
+Yes, there is a calendar option <b>"Ignore corporate calendar"</b> on the 
+calendar options screen.  Select it will prevent a corporate calendar
+from adding events to your calendar. For existing corporative events, you
+have to delete them manually. For new calendars, you can use the 
+<b>"erase your calendar"</b> form on the admin screen to clear your calendar.
+</blockquote> 
+
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a18"><b class="bq">Q18. How do I tell if webcal is running under mod_perl?</b><br><p>
+
+<blockquote> 
+
+Use the <i>version</i> command. While viewing your calendar, enter
+a URI like <b>http://webcal.ma.utexas.edu/webcal/wcal?c=version</b>
+in the location bar and hit enter. It should report back something
+like
+<pre>
+OS: linux
+httpd 5.006001
+mod_perl 1.26
+</pre>
+If webcal is not running under mod_perl, the server would be
+<i>perl</i> instead of <i>httpd</i>.
+
+<p>
+If you're running webcal 2.8.6 or later, click on the
+version string on the main header will issue the version
+inquiry automatically.
+
+</blockquote> 
+
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a19"><b class="bq">Q19. Can one subscribe a calendar to receive email reminders?</b><br><p>
+
+<blockquote> 
+
+WebCalendar itself does not support mailing lists. However, 
+you can turn a calendar into a subscription service with the help of
+a mailing list manager. To do so, install a mailing list manager
+first, and create a mailing list for the service you want to provide.
+Then change the email address for the calendar you want to publish
+to the email address of the your mailing list. Email reminders will
+be posted to the mailing list after the change.
+
+</blockquote> 
+
+
+<!------------ ---------------  ---------------------------------  --------->
+<a name="a20"><b class="bq">Q20. What are "Virtual Calendar Groups" for?</b><br><p>
+
+<blockquote> 
+
+<b>Virtual Calendar Group</b> is a feature added in 2.8.6i. It allows
+you to arrange calendars on a calendar server into different groups.
+Calendar names are not visible to members outside its group.
+
+<p>
+For example, suppose your company consists of three departments: <b>sales</b>, <b>development</b>
+and <b>custom support</b>. You may create three virtual groups, say <i>sales</i>, <i>dev</i> and
+<i>support</i>. You can then create three special calendars and assign them as the 
+group administrator for each of the three groups. With this setup, you effectively 
+delegated calendar administration to individuals in three departments. 
+
+</blockquote> 
+
+
+
+<!------------ ---------------  ---------------------------------  --------->
+
+<br><br><br><br>
+<a href="mailto:mzou@math.utexas.edu" style="text-decoration:none">
+<font size=2 color=#999999>
+</font></a>
+<br><font color=#aaaaaa size=1>Last updated:  Mon, 24 Nov 2003 14:11:22 CDT</font>
+</td></tr></table>
+</BODY>
+<a href="http://directory.mozilla.org/Computers/Programming/Languages/Perl/WWW/Scripts/Calendars/" target=domz><img src="img/cool2.gif" width=140 height=45 border=1 align=right alt="D M O Z listing" title="D M O Z listing"></a><a href="http://www.math.utexas.edu/mailman/listinfo/webcalendar"><img src="img/mailman.jpg" width=148 height=45 border=1 align=right alt="Mailing list" title="Mailing List"></a><a href="http://freshmeat.net/projects/web-calendar" target=fmeat><img src="img/freshmeat.gif" width=140 height=45 border=1 align=right alt="On Freshmeat" title="On Freshmeat"></a>
+</HTML>

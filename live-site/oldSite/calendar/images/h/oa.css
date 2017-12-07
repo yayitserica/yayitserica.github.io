@@ -1,0 +1,31 @@
+
+body {
+  background-color: #ffffff;  
+  font-family: "comic sans ms", arial;
+  margin-top: 20px;
+  margin-left:20px;
+  margin-right:20px;
+}
+
+.close {border: 1px solid green; 
+        background-color: yellow;
+        font-size:9px;
+        font-weight:bold;
+	text-decoration:none;}
+
+a         { color:#00F; text-decoration:none}
+a:hover   { color:#F00; text-decoration:none;}
+a:visited { color:#660; text-decoration:none}
+a:active  { color:#66F; text-decoration:none}
+
+FIELDSET { background-color: #ccc}
+
+.legend {font-size:large; 
+	 font-weight:bold;
+	 border-left: 1px solid #999;
+	 border-bottom: 1px solid #333;
+	 border-right: 1px solid #666;
+	 border-top: 1px solid #aaa;
+	 background-color:#ddd;
+	 padding: 2px;
+         color:blue;}

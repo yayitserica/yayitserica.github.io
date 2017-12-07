@@ -1,0 +1,74 @@
+
+See APACHE2+MOD_PERL2 if you're running
+apache2+mod_perl2 on your system.
+
+
+ 
+
+1. Recommended environment
+==========================
+
+ *) Apache with mod_perl extension. Webcalendar
+    will run as a pure cgi script, but it is 
+    rather slow.
+
+2. Required environment
+========================
+
+ *) A web server capable of running perl cgi scripts.
+
+ *) Perl 5.005 or later, with CGI module 2.46 or later. 
+
+ *) Super user privilege. If you don't have that,
+    you need to have the privilege to install CGI
+    scripts under your main cgi-bin subtree.
+
+ *) The cgi scripts need to be installed on your web
+    server.  It needs a spool directory to store user
+    calendars.  This spool directory must be owned by 
+    the owner of your webserver.
+
+    +----------------------------------------------+
+    | You should NOT install webcal in your main   |
+    | cgi-bin directory. Install it in a different |
+    | cgi directory or a sub directory of cgi-bin. |
+    | You may need to reconfigure your webserver   |
+    | also.                                        |
+    +----------------------------------------------+
+
+ *)   If you need to install webcalendar on multiple 
+    virtual servers running on a single physical host, 
+    you'll need a separate spool directory for each
+    virtual server. If you use the http 'cookie' auth
+    method, the cgi scripts can be installed in a 
+    single cgi directory and shared by all virtual 
+    servers. If you select the htpassword authentication
+    method, a separate CGI directory is needed for each
+    virtual server. In this case, you may still install
+    the cgi script in a single location and use symbolic
+    links to link them to the different cgi directories.
+
+3. Install with super user privilege
+=====================================
+
+  *) Edit the first section of install.pl, and run 
+       perl install.pl
+     See sample install scripts in ./examples.
+  
+4. Install without super user privilege
+=====================================
+
+  *) unpack the distribution in your main cgi-bin
+     directory. This will create a subdirectory
+     webCal2.9.0
+
+  *) Change into this directory, edit the file
+     install.pl and
+
+  *) execute the installation script from a browser,
+     i.e., visit  
+     http://your_webserver/cgi-bin/webCal2.9.0/install.pl
+     using your favoriate browser.
+
+
+

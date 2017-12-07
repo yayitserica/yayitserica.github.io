@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Archivo|Lato|Montserrat');
+.navbar {
+  background-color: white;
+}
+.navbar-brand {
+  color: #00A7B5;
+  font-family: 'Montserrat', sans-serif;
+}
+.nav-link{
+  color: black;
+}
+.nav-link:hover {
+  color: #00A7B5;
+}
+.navbar-brand:hover {
+  color: #8A8A8A;
+}
+.jumbotron {
+  padding: 0;
+  background-color: #00A7B5;
+}
+.jumbotron .jumbotron-image {
+  height: 300px;
+}
+.bg-gray {
+  background-color: #8A8A8A;
+}
+h2, .display-3{
+  color: #8A8A8A;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+.card {
+  font-family: 'Montserrat', sans-serif;
+}
+p {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+li {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn-primary {
+  background-color:  #00A7B5;
+  border-color: #00A7B5;
+}
+.about-erica, #email {
+  color: #00A7B5;
+}
+.btn-primary:hover {
+  background-color: #8A8A8A;
+  border-color: #8A8A8A;
+}
+.about-erica:hover, #email:hover {
+  color: #8A8A8A;
+}
+h5 {
+  color: #8A8A8A;
+  text-align: center;
+}
+h4 {
+  text-align: center;
+}

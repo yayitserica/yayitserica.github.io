@@ -1,0 +1,10 @@
+
+The following four are excerpts from httpd.conf for various
+installation scenarios.
+
+ httpd.conf-mod_perl-1
+ httpd.conf-mod_perl-2
+ httpd.conf-no-mod_perl-1
+ httpd.conf-no-mod_perl-2
+
+

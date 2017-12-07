@@ -1,0 +1,48 @@
+
+WebCalendar 2.9.0 Features:
+
+   *  Allow your user to set up and manager his/her calendar 
+
+   *  Support public calendars, where everyone can edit his/her own 
+      calendar entries.
+
+   *  Display day, week, and month views of the user's calendar 
+
+   *  Schedule single or repeating calendar entries 
+
+   *  Browse and edit another user's calendar, provided permission is given 
+
+   *  Schedule reminders to give the user notice of events 
+
+   *  Two levels of restrict access to the user's calendar 
+
+   *  Merge with other calendars or calendar files 
+
+   *  Edit a group of calendars (meeting events) 
+
+   *  Arrange calendars into meeting groups 
+
+   *  Compare a group of calendars and find schedule conflicts 
+
+   *  Announce meetings by email 
+
+   *  Change the time zone context 
+
+   *  Support diary, address book, task management etc.
+
+   *  Monitor multiple calendars in a single session
+
+   *  Easy install on multiple virtual servers.
+
+   *  Ability to add events on the command line. 
+
+   *  Ability to create new calendars on the command line.
+ 
+   *  Support CSS
+
+   *  Support document upload, image review, image in events etc. 
+
+   *  Support corporate calendar, and calendar dependency
+
+   *  Support drag and drop editing under IE 5.5 and up.
+

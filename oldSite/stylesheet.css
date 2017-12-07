@@ -1,0 +1,82 @@
+.nav a {
+  //color: #5a5a5a;
+  color: #0A51AC;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 14px 10px;
+  text-transform: uppercase;
+}
+
+.nav li {
+  display: inline;
+  font-family: 'Lora','Shift', sans-serif;
+}
+
+.jumbotron {
+  //background-image:url('ombrejumbotron.jpg');
+  background-image:url('cuba.jpg');
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.jumbotron .container {
+  position: relative;
+  //top:-10px;
+  top:25px;
+}
+
+.jumbotron h1 {
+  color: #e5e600;
+  font-size: 48px;  
+  font-family: 'Shift', sans-serif;
+  font-weight: bold;
+}
+
+.jumbotron p {
+  font-size: 20px;
+  color: #e5e600;
+  font-family: 'Shift', sans-serif;
+}
+
+.jumbotron a {
+    font-family: 'Shift', sans-serif;
+    color: #ace600;
+    font-size:170%;
+}
+.learn-more {
+  background-color: #f7f7f7;
+}
+
+.learn-more h3 {
+  font-family: 'Shift', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.learn-more a {
+  color: #00b0ff;
+ }
+
+.bottomheader {
+    background-color: #efefef;
+    //background-color: #43FFFE; this is teal blue
+    border-bottom: 1px solid #dbdbdb;
+    font-family: 'Shift', sans-serif;
+    color: #0A51AC;
+}
+
+.bottomheader h2 {
+    font-weight: bold;
+}
+.neighborhood-guides h2 {
+    //color: #393c3d;
+    background-color: #43FFFE;
+    color: #0A51AC;
+    font-size: 24px;
+}
+
+.neighborhood-guides p {
+    font-size: 15px;
+    margin-bottom: 13px;
+}

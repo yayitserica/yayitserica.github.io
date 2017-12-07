@@ -1,0 +1,537 @@
+#!c:\iperl\bin\perl.exe
+#
+# $Header: /home/cvs/webCal/webCal2/install.pl-win32,v 1.7 2004/10/21 16:08:26 mzou Exp $
+#
+
+#--------------------------------------------------------------------
+# Edit the settings below and run
+#      perl install.pl-win32
+#
+# this script is for mswin**. if you have apache and perl
+# installed already, you may use this script to install
+# webcalendar from source. keep in mind that you may need
+# to manually tweak a few things to make it work.
+# 
+#--------------------------------------------------------------------
+# location of your perl executable.
+# Note:  to insert a \ into the string, you need to escape it as  \\.
+$PERL="c:\\iperl\\bin\\perl.exe";
+
+# CGIDIR is the pathname of the dir where web calendar cgi scripts reside.
+
+$CGIDIR="c:/webcal/cgi-bin/wcal";
+
+# IMAGEDIR is the directory to store webcalendar icons. Must be
+# accessible by your webserver. This directory should NOT be under
+# your cgi-bin subtree, it should be under htdocs.
+
+
+$IMAGEDIR="c:/webcal/images";
+
+# if you run sendmail on your webserver, the path of sendmail
+# $SENDMAIL="/usr/bin/sendmail";
+# otherwise, choose smtp. Undefine SENDMAIL and define SMTPTO and SMTPFROM.
+# SMTPTO   is the DNS name or IP of your smtp server.
+# SMTPFROM is the DNS name or IP of your web server.
+
+$SMTPTO="localhost";
+$SMTPFROM="localhost";
+
+# CGINAME is the REAL FULL PATHNAME of the cgi script, this is where the
+# script is installed. Your server should be able to execute script from
+# this location. CGILINK, CGIUPLOAD, CGIIMPORT and CGICSS are helper scripts
+# used by webcalendar.
+
+$CGINAME="$CGIDIR/webcal.pl";
+$CGILINK="$CGIDIR/webcal-link.pl";
+$CGIUPLOAD="$CGIDIR/webcal-upload.pl";
+$CGIIMPORT="$CGIDIR/webcal-import.pl";
+$CGICSS="$CGIDIR/webcal-css.pl";
+$CGIMISC="$CGIDIR/webcal-misc.pl";
+
+# DAEMONNAME is the full pathname of the webcald. If you want your calendar
+# to send you email reminders, you need to have a way to start this daemon
+# each time your server is rebooted.
+#
+$DAEMONNAME="$CGIDIR/webcald";
+$STARTUPFILE="$CGIDIR/startup.pl";
+
+#------------------------------------------------------------------------------------------
+$AUTHMETHOD="cookie";
+#------------------------------------------------------------------------------------------
+$TMPDIR="C:/temp";
+#------------------------------------------------------------------------------------------
+
+#
+%servers = (
+   # you have to have a default server. It must be named 'default_server'.
+   # It is the only server if you don't install webcal on more
+   # than one virtual servers.
+
+  'default_server' =>  { 
+      # DNS name of your default web server
+      'servername'       => 'localhost',  
+      # http or https
+      'http'             => 'http',       
+      # owner of http*d. Please double check.
+      'owner'            => 'nobody', 
+      # email address to be used on the From line of email
+      # reminders
+      'daemonEmail'      => 'webcal@localhost',
+      # Directory to store calendar data
+      'spooldir'         => 'c:/webcal/spool/server1',    
+
+      # cgidir.
+      'cgidir'            => "$CGIDIR",
+
+      # URLs of cgi, relative to /.  It is recommanded to use
+      # short pathname for the main webcal script. I personally use /y/x
+      # on my server. This requires some reconfiguration of your web server.
+      #
+      # cginame will be refered hundreds of time on each page webcal
+      # generates, a byte saved here will translated to megabytes of
+      # saved network traffic.
+      #
+
+      'cginame'           => '/cgi-bin/wcal/webcal.pl',
+      'cgilink'           => '/cgi-bin/wcal/webcal-link.pl',
+      'cgiimport'         => '/cgi-bin/wcal/webcal-import.pl',
+      'cgiupload'         => '/cgi-bin/wcal/webcal-upload.pl',
+      'cgicss'            => '/cgi-bin/wcal/webcal-css.pl',
+      'cgimisc'           => '/cgi-bin/wcal/webcal-misc.pl',
+
+      # how the icon is referenced. Please use short names if possible. I
+      # personally use /i on my server. See the previous comment for a
+      # reason.
+      #
+      'imgdirurl'        => '/i',
+       
+      # the next variable is used only if you use htpassword authentication 
+      #'signupurl'        => 'cgi-bin/wcalsignup/signup.pl',
+    
+      # subdirectories to hold user uploads. They are sub
+      # directories of $IMAGEDIR
+      #
+
+      'uploadtmpsubdir'  => 'uploads',
+      'uploadsubdir'     => 'uis',
+      'stylesheetdir'    => 'css',     
+
+      # banner setup, if any. See banner.perl for examples. Banner can be used
+      # to implement a local branding of webCal. It is meant
+      # to be implemented by
+      # experienced programmers.
+      #
+      'banner'           => '',
+     
+      # Greeting page setup. These are not really needed. It provides
+      # a simple entry point to webcal.
+      #
+      'greetingfile'     => '',
+      'greetingurl'      => '',
+
+      # Other variables in %webcalConcig:c may also be redefined.
+      # See webcalConfig for a complete list of configurable variables.
+  },
+       
+  # Define the above table for each virtual server you plan
+  # to install and run webcalendar.
+
+);
+
+
+#==========================================================================================
+#  You don't need to edit the rest of this file
+#==========================================================================================
+sub do_install {
+    if($ENV{'SERVER_NAME'}) {
+	print "Content-type: text/html\n\n";
+	print "<html><body bgcolor=#ffffff>\n";
+	print "<center><h1>WebCalendar Installation Log</h1></center>\n";
+	print "<pre>\n";
+    } else {
+	print "\nWebCalendar Installation Log\n\n";
+    }
+
+    &check_virtual_server_subdir;
+    &install_script;
+
+    map {install_one_server($_);} (keys %servers);
+
+    if($ENV{'SERVER_NAME'}) {
+	print "</body></html>";
+    }
+}
+#------------------------------------------------------------------------------------------
+sub printmsg {
+    my ($msg , $btag, $etag) = (@_);
+    open(FF,">>LOG.txt");
+    if($ENV{'SERVER_NAME'}) {
+	if($btag and $etag) { print $btag, $msg, $etag;}
+	else {print FF "<font size=2> $msg </font>";}
+    } else {
+	print FF $msg;
+    }
+}
+
+#---------------------------------------------------------------------
+sub check_virtual_server_subdir {
+    my @all_servers = (keys %servers);
+    my %cgidirhash = ();
+    my %cginamehash = ();
+    my $nservers = 0+@all_servers;
+    if( 1 ) {
+	foreach $server (@all_servers) {
+	    my $cgidir = $servers{$server}->{'cgidir'};
+	    my $sname =$servers{$server}->{'servername'};
+	    $cgidirhash{$sname} = $cgidir;
+	    $cginamehash{$sname} = $servers{$server}->{'cginame'};
+	}
+	foreach $server (@all_servers) {
+	    my $cgidir = $servers{$server}->{'cgidir'};
+	    foreach $other (@all_servers) {
+		next if $other eq $server;
+		my $dir = $servers{$other}->{'cgidir'};
+	    }
+	}
+	my $error = 0;
+    }
+    printmsg "\n\n";
+    printmsg "=========================================================\n";
+    printmsg "Please configure your webserver to use the following CGI directories\n\n",
+    "<font color=#009900><b>", "</b></font>";
+    my $dsvrname = $servers{'default_server'}->{'servername'};
+    printmsg "Server=$dsvrname, ",  "<font color=#0000ff><b>", "</b></font>";
+    printmsg "cgidir=$CGIDIR ", "<font color=#ff0000><b>", "</b></font>";    
+    printmsg "\n\n";
+    if($AUTHMETHOD eq 'password') {
+	my $sdir = $SIGNUPCGINAME; $sdir =~ s/[^\/]+$//g;
+	my $surl = $servers{'default_server'}->{'signupurl'};
+	printmsg "Server=$dsvrname, ",  "<font color=#0000ff><b>", "</b></font>";
+	printmsg "cgidir=$sdir ", "<font color=#ff0000><b>", "</b></font>";    
+	printmsg "cginame=$surl\n\n", "<font color=#009900><b>", "</b></font>";    
+    }
+    for $k (keys %cgidirhash) {
+	$dir = $cgidirhash{$k}; if(! $dir) { $dir = $CGIDIR;}
+	$name = $cginamehash{$k};
+	printmsg "Server=$k, ",  "<font color=#0000ff><b>", "</b></font>";
+	printmsg "cgidir=$dir ", "<font color=#ff0000><b>", "</b></font>";
+	printmsg "cginame=$name\n\n", "<font color=#009900><b>", "</b></font>";
+    }
+    printmsg "==========================================================\n";
+    printmsg "\n\n";   
+}
+#------------------------------------------------------------------
+sub copy_server_setup {
+    my $server = @_[0];
+    my $ref = $servers{$server};
+    my $ans="";
+    my $servername = "";
+    if($ref and $ref->{'spooldir'}) {
+	my $http = $ref->{'http'};
+	my $tmp = $ref->{'cginame'};
+	$servername=$ref->{'servername'};
+	$ref->{'fcginame'} = "$http://$servername$tmp";
+	$tmp = $ref->{'imgdirurl'};
+	$ref->{'fimgdirurl'} = "$http://$servername$tmp";   
+	$ref->{'imgdir'} = "$IMAGEDIR";   
+	foreach $k (keys %$ref) {
+	    if( $k ne 'http' and $k ne 'owner') {
+		my $v = $ref->{$k}; $v=~ s/\'/\\\'/g;
+		$tmp = "\'$k\' => \'$v\',\n";
+		$ans .= $tmp;
+	    }
+	}
+    }
+    return ($servername, $ans);
+}
+
+#--------------
+
+sub mkdirhier {
+    my ($pathname) = (@_);
+    my ($abspath, @path);
+    if($pathname =~ /^\// or $pathname =~ /^[A-Za-z]:\//)   {
+	$abspath = $pathname;
+    } elsif($pathname =~ /^\.\//) {
+	use Cwd;
+	my $tmp = cwd();
+	$pathname =~ s/^\.\///;
+	$abspath = "$tmp/$pathname";
+    } else {
+	printmsg "Don't know how to mkdir $pathname", "<font color=#ff0000><b>", "</b></font>";
+	exit 1;
+    }
+    @path = split(/\//, $abspath);
+    $pathname="";
+    for $k (@path) {
+	if($k) {
+	    if($pathname) { $pathname .= "/$k";} else { $pathname = $k;}
+	    if(! -d "$pathname") {
+		printmsg "------ create directory $pathname\n", "<font color=#0000ff><b>", "</b></font>";
+		if(! mkdir($pathname, 0755) ) {
+		    printmsg  "Cannot mkdir \"$pathname\"", "<font color=#ff0000><b>", "</b></font>";
+		    exit 1;
+		}
+	    }
+	}
+    }
+}
+
+#--------------
+
+sub system1 {
+    printmsg "      " .  join(' ', @_) . "\n";
+    my ($s, $t, @args, $i); @args = (); $i=0;
+    for $t (@_) { $s=$t . ""; if($i){$s =~ s/\//\\/g;} $i++; push @args, $s;} 
+    if( system(@args)) {
+	printmsg "        Command failed: $! ", "<font color=#ff0000><b>", "</b></font>";
+	printmsg " == Trying to continue ==\n", "<font color=#00cc00><b>", "</b></font>";
+    }
+}
+
+#--------------
+
+sub install_script {
+    if( $SENDMAIL ) {
+	if( ! -f "$SENDMAIL" )  {
+	    printmsg "$SENDMAIL does not exist", "<font color=#ff0000><b>", "</b></font>";
+	    exit 2;
+	}
+	elsif(! -x "$SENDMAIL") {
+	    printmsg "$SENDMAIL does not to be the \'sendmail\' binary.", "<font color=#ff0000><b>", "</b></font>";
+	    exit 3;
+	}
+    } else {
+	if(! "$SMTPTO" or  ! "$SMTPFROM") {
+	    printmsg "Please specify your SMTP server.",  "<font color=#ff0000><b>", "</b></font>";
+	    exit 4;
+	}
+    }
+
+
+    if(! $PERL) {
+	printmsg "Could NOT locate your perl binary. Please make sure perl5 or later is installed.",
+	"<font color=#ff0000 size=+1><b>", "</b></font>";
+	exit 5;
+    }
+   
+   
+    if(! $CGINAME) {
+	printmsg "CGINAME cannot be empty.", "<font color=#ff0000><b>", "</b></font>";
+	exit 6;
+    }
+
+    if( ! $CGILINK) {
+	printmsg "CGILINK cannot be empty."  , "<font color=#ff0000><b>", "</b></font>";
+	exit 7;
+    }
+
+    if( ! $CGICSS) {
+	printmsg "CGICSS cannot be empty."  , "<font color=#ff0000><b>", "</b></font>";
+	exit 7;
+    }
+
+    if( ! $CGIMISC) {
+	printmsg "CGIMISC cannot be empty."  , "<font color=#ff0000><b>", "</b></font>";
+	exit 7;
+    }
+
+
+    if(! $CGIUPLOAD) {
+	printmsg "CGIUPLOAD cannot be empty." , "<font color=#ff0000><b>", "</b></font>";
+	exit 8;
+    }
+   
+    if(! $CGIIMPORT) {
+	printmsg "CGIIMPORT cannot be empty." , "<font color=#ff0000><b>", "</b></font>";
+	exit 9;
+    }
+
+    mkdirhier($CGIDIR)  if ! -d $CGIDIR;
+    mkdirhier($IMAGEDIR)  if !  -d $IMAGEDIR;
+
+    my $tdir = $CGINAME; $tdir =~ s/[^\/]+$//g;
+
+    if(! -d "$tdir") {    mkdirhier($tdir);     }
+
+    printmsg "------ copy scripts\n",  "<font color=#0000ff><b>", "</b></font>";
+
+    while(<*.perl>) {  system1( "xcopy", $_, $CGIDIR); }
+    install_perl_script("webcal.pl", $CGINAME);
+    install_perl_script("webcal-iupload.pl", $CGIUPLOAD);
+    install_perl_script("webcal-import.pl", $CGIIMPORT);
+    install_perl_script("webcal-link.pl", $CGILINK);
+    install_perl_script("webcal-css.pl", $CGICSS);
+    install_perl_script("webcal-misc.pl", $CGIMISC);
+    install_perl_script("webcald.pl", $DAEMONNAME);
+    install_perl_script("startup.pl", $STARTUPFILE);
+
+    system1("xcopy", "webcalVirtual.pm", "$CGIDIR");
+    system1("xcopy", "webcalSupport.pm", "$CGIDIR");
+    system1("xcopy", "webcalAuth_ldap.pm", "$CGIDIR");
+    system1("xcopy", "webcalAuth_default.pm", "$CGIDIR");
+    system1("xcopy", "webcalCrypt.pm", "$CGIDIR");
+    system1("xcopy", "webcalCrypt_CBC.pm", "$CGIDIR");
+    system1("xcopy", "webcalContactDB.pm", "$CGIDIR");
+    system1("xcopy", "webcalContactDB_ldap.pm", "$CGIDIR");
+    system1("xcopy", "webcalAuth.pm", "$CGIDIR");
+    system1("xcopy", "webcalLock.pm", "$CGIDIR");
+    system1("xcopy", "webcalMoon.pm", "$CGIDIR");
+    system1("xcopy", "webcalSync.pm", "$CGIDIR");
+    system1("xcopy", "tzlist.pm", "$CGIDIR");
+    system1("xcopy", "webcal_vcal_sync_server.pl", "$CGIDIR");
+    system1("xcopy", "webcal_vcal_sync_client.pl", "$CGIDIR");
+    system1("xcopy", "webcal_cmd_server.pl", "$CGIDIR");
+    system1("xcopy", "webcal_cmd.pl", "$CGIDIR");
+    system1("xcopy", "smtplib.pm", "$CGIDIR");
+    system1("xcopy", "default.css", "$CGIDIR");
+    system1("xcopy", "dark.css", "$CGIDIR");
+    system1("xcopy", "harry.css", "$CGIDIR");
+    system1("xcopy", "transparent.css", "$CGIDIR");
+
+
+    printmsg "------ Copy webcalConfig.pm template\n", "<font color=#0000ff><b>", "</b></font>";
+    if(open(SRC, "<./webcalConfig.pm") and open(TGT, ">$CGIDIR/webcalConfig.pm")) {
+	while(<SRC>) {
+	    if(/\'cookieAuth\'/) {
+		if($AUTHMETHOD eq "password") { $_ = "      \'cookieAuth\'=>0,\n";}
+		else {  $_ = "      \'cookieAuth\'=>1,\n";}
+	    }
+            if($TMPDIR) { s/\'tmpdir\'=>\"\/tmp\"/\'tmpdir\'=>\'$TMPDIR\'/;}
+	    print TGT $_ if not /aAa/;
+	}
+	close SRC; close TGT;
+    }
+
+    printmsg "------ Copy icons to $IMAGEDIR\n", "<font color=#0000ff><b>", "</b></font>";
+    while(<images/*>) {
+	if(-f "$_"){ system1("xcopy", $_, $IMAGEDIR); }
+	elsif( -d "$_") { system1("xcopy /e/i/d/k/r/h",  $_, $IMAGEDIR); }
+    }
+}
+
+#--------------
+
+sub install_perl_script {
+    my ($src, $dest) = (@_);
+
+    if(open SRC, "<$src" and open TGT, ">$dest") {
+	print TGT "#!$PERL\n\n";
+	my $tmp = $CGIDIR;
+	print TGT "use lib \"$tmp\";\n\n";
+
+	while(<SRC>) { print TGT $_;}
+	close SRC; close TGT;
+	chmod 0755, $dest;
+    }
+}
+
+#--------------
+
+sub install_one_server {
+    my ($name) =(@_);
+   
+    printmsg "\n+++++++++++ install server \"$name\" ++++++++++++\n\n",
+    "<font color=#ff0066 size=+1><b>", "</b></font>";
+
+    $config_dist = "./webcalConfig.pm";
+    $config = "$CGIDIR/webcalConfig.pm";
+    if( ! -f "$config") { system1( "xcopy", "$config_dist", "$config"); }
+    $httpdowner = $servers{$name}->{'owner'};
+    $spooldir = $servers{$name}->{'spooldir'};
+    
+    my $cgidir = $servers{$name}->{'cgidir'};
+   
+    ($server_name, $server_setup) = copy_server_setup($name);
+
+    mkdirhier("c:/temp")  if ! -d "c:/temp";
+    $tfile = "c:/temp/wcal.tmp";
+
+    if(open SRC, "<$config" and open TGT, ">$tfile") {
+	if($name eq 'default_server') {
+	    while(<SRC>) {
+                s/\$SENDMAIL=.+;/\$SENDMAIL=\"$SENDMAIL\";/g;
+                s/\$SMTPTO=.+;/\$SMTPTO=\"$SMTPTO\";/g;
+                s/\$SMTPFROM=.+;/\$SMTPFROM=\"$SMTPFROM\";/g;
+		s/insert_default_server_setup_here/\n$server_setup\n\n/;
+		print TGT $_;
+#"
+	    }
+	} else {
+	    while(<SRC>) {
+		print TGT $_;
+		if(/insert_virtual_server_setup_here/) {
+		    print TGT "\'$name\'=>{\n", $server_setup, "\n},\n\n\n";
+		}
+	    }
+	}
+	close SRC; close TGT;
+    }
+    system1("xcopy", "$tfile", "$config");
+    unlink "$tfile" if -f "$tfile";
+
+    mkdirhier("$spooldir");
+    if(! -f "$spooldir/passwd") {   system1("xcopy", "./passwd", "$spooldir/passwd");}
+    chmod 0600, "$spooldir/passwd";
+    if(! -f "$spooldir/.htaccess" ) { system1("xcopy","./htaccess","$spooldir/.htaccess");}
+    chmod 0444, "$spooldir/.htaccess";
+    if(open FILE, ">$spooldir/log") { print FILE "\n"; close FILE;}
+    chmod 0711, "$spooldir";
+
+    my $imagedir = $IMAGEDIR;
+    my $udir = $servers{$name}->{'uploadtmpsubdir'};
+    mkdirhier("$imagedir/$udir");
+    if(! -f "$imagedir/$udir/.htaccess" ) { system1("xcopy", "./htaccess","$imagedir/$udir/.htaccess");}
+
+    $udir = $servers{$name}->{'stylesheetdir'}; 
+    mkdirhier("$imagedir/$udir"); 
+
+    #---------- sample style sheet 
+    my $iurl = $servers{$name}->{'imgdirurl'}; 
+    open(SRC, "<./transparent.css");
+    open(TGT, ">$cgidir/transparent.css-tmp");
+    while(<SRC>) { s/_o_/$iurl/g; print TGT $_;}
+    close(SRC); close(TGT);
+    system1("xcopy", "$cgidir/transparent.css-tmp","$cgidir/transparent.css");
+    #---------  sample style sheet 
+
+    $udir = $servers{$name}->{'uploadsubdir'};
+    mkdirhier("$imagedir/$udir"); 
+    my $gfile = $servers{$name}->{'greetingfile'};
+    $udir = $gfile; $udir =~ s/[^\/]+$//;
+    if($udir) { mkdirhier("$udir")if !  -d "$udir";}
+    my $fullcgiurl = $servers{$name}->{'fcginame'};
+    my $signupurl = $servers{$name}->{'signupurl'};
+    
+    if($udir and open(FILE, ">$gfile")) {
+        print FILE <<EOF
+<HTML>
+<TITLE></TITLE>
+<META HTTP-EQUIV="refresh" content="0; URL=$fullcgiurl">
+<body onload="document.location=\'$fullcgiurl\'">
+</body>
+</HTML>
+EOF
+    ;
+        printmsg "\n\n";
+        printmsg "        Please use the following url to access your webcalendar server\n", "<font size=+1><b>", "</b></font>";
+        printmsg "               ";
+        printmsg "$fullcgiurl", "<a href=\"$fullcgiurl\"><font color=#0000ff size=+1><b>", "</b></font></a>";
+        printmsg "\n\n";
+	close FILE;
+    } else {
+	if($udir) {
+	    printmsg "  Cannot write to $gfile. Installation failed.", 
+	    "<font color=#ff0000 size=+1><b>", "</b></font></a>";
+	}
+    }
+}
+
+#-------------------------------------------------------------------
+print  "installation log is saved in log.txt";
+&do_install;
+print  "installation log is saved in log.txt";
+#--------------------------------------------------------------------
+
+

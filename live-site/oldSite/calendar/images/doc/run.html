@@ -1,0 +1,216 @@
+<HTML><HEAD><TITLE>WebCalendar Manual: </TITLE>
+<META Name="description" Content="webcal: web-based calendaring and scheduling system">  
+<META Name="keywords" Content="webCalendar, webcal, Calendar Server, netcalendar, net calendar net-calendar,online calendar, real-time calendar, online diary system, online address book, mod_perl application, group calendar, team calendar, family calendar, event publication, tasks manager, scheduling service, calendar service,  business calendar, open source calendar"> 
+<STYLE TYPE="text/css">
+    h2 { color:#333333; font-weight:heavy;font-family:arial}
+    .nav {font-size:x-mall;}
+    .nav:hover { color:red; font-weight:bold; background-color: green;}
+    .nav:active { color:red; background-color: green; font-decoration:none;}
+    .bq { color:#cc0000;} 
+</STYLE>
+</HEAD>
+<!--- This file is auto generated, please do not edit -->
+<BODY background="img/bg19.gif" bgcolor=#ffffff>
+
+<table border=0 cellspacing=0 cellpadding=0>
+ <tr><td align=left>
+    <table border=0 cellspacing=0 cellpadding=0>
+       <tr valign=bottom><td width=138 rowspan=3><img src="img/wcalicon.gif" border=0 width=138 height=93></td>
+           <td nowrap align=left width=600>
+<img src="img/webcalendar.gif" border=0 width=331 height=47>
+<img src="img/version.gif" border=0 width=125 height=30>
+<a href="http://www.lousapparel.com"><img src="img/spacer.gif" border=0 width=1 height=1><a>
+</td>
+       </tr>
+       <tr height=8><td height=8><img src="img/sbar.gif" width=600 height=8></td>
+       </tr>
+       <tr><td><img src="img/spacer.gif" width=1 height=8></td>
+       </tr>
+    </table>
+ </td><td>&nbsp;</td></tr>
+</table>
+
+<table border=0 cellspacing=0 cellpadding=0>
+   <tr>
+       <td valign=top><img src="img/spacer.gif" width=128 height=30 border=0><br>
+<!-- navigation table -->
+<div id="slide" style="position:absolute;top:140;left:2;">
+<table border=0>
+<tr><td nowrap><font size=2><a class="nav" href="index.html"><b>Home</b></a></font></td></tr>
+<tr><td nowrap><font size=2><a class="nav" href="features.html">Features</a></font></td></tr>
+<tr><td nowrap><font size=2><a class="nav" href="download.html">Download</a></font></td></tr>
+<tr><td nowrap><font size=2><a class="nav" href="install/index.html"><b>Installation</b></a></font></td></tr>
+<tr><td nowrap><font size=2>CGI options</font></td></tr>
+<tr><td nowrap><font size=2><a class="nav" href="try.html">Try it out</a></font></td></tr>
+<tr><td nowrap><font size=2><a class="nav" href="faq.html">FAQ</a></font></td></tr>
+<tr><td nowrap><font size=2><a class="nav" href="manual/index.html"><b>User's Guide</b></a></font></td></tr>
+</table>
+</div>
+<!-- end navigation table -->
+</td><td valign=top><p><p>
+
+
+<script language="JavaScript" src="misc/javascript.js"></script>
+
+<h2><font color=#aaaaaa>&#171;</font> CGI Options <font color=#aaaaaa>&#187;</font></h2>
+
+<p>
+A few CGI options are provided to control the appearance of webCalendar. 
+These options can be passed to webcalendar cgi through query string. They
+allow you to publish your calendar in different styles. 
+
+<ul>
+<li> <b>anonymous</b> -- This option establish your user with a special guest
+identity. It takes values <i>true</i> or <i>false</i>.
+This option is required to publish your calendar on the web. 
+<br>
+<br>
+<li> <b>calendar</b> -- This option specifies the calendars to view, it takes
+a value of comma separated calendar names. This option is meant to
+be used with the <b>anonymous</b> option to publish your calendars.
+Here is an example.
+<br>
+<br>
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&refresh=0">
+http://webcal.ma.utexas.edu/webcal/wcal?anonymous=true&calendar=Demo</a>
+<br>
+<br>
+<li> <b>view</b> -- This option sets the view mode. It takes value
+from the following list. Multiple values must be separated by comma.
+
+  <ul>
+	<li> <b>day</b>  -- display day view.
+	<li> <b>week</b> -- display week view.
+	<li> <b>month</b> -- display day view.
+	<li> <b>year</b>  -- display day view.  <br> <br>
+	<li> <b>block</b> -- display calendar using the regular grid view.
+	<li> <b>list1</b> -- display calendar as a list of events in chronological order.
+	<li> <b>list2</b> -- display list view in a fancier format.
+	<li> <b>list3</b> -- display calendar using yet another fancy list. 
+ </ul>
+	  <br> 
+Examples: 
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,block&refresh=0">view=block,week</a> &nbsp;&nbsp;&nbsp;
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,list3&listviewnavigation=month&nbar=false&header=custom&refresh=0">
+view=week,list3&nbar=false&listviewnavigation=monthtable&header=custom</a>
+<br>
+<br>
+<li> <b>header</b> -- This option sets the calendar page header. There are three possible
+values: 
+
+  <ul>
+  <li> <b>none</b> -- no header will be displayed. 
+  <li> <b>custom</b> -- display a custom header. You need to set it up via the option screen.
+  <li> <b>default</b> -- display the default header (this is the default). 
+ </ul>
+<br>
+Example:
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,block&header=none&refresh=0">
+header=none</a> &nbsp;&nbsp;&nbsp;
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,block&header=custom&nbar=false&refresh=0">header=custom</a> 
+<br>
+<br>
+
+<li> <b>calendarselection</b> -- This option sets up the calendar selection form on
+the page header. Possible values are:
+  <ul>
+  <li> <b>false</b> -- don't display calendar selection form.
+  <li> <b>entry</b> -- use an entry box.
+  <li> <b>menu</b> --  use a drop down menu. Please note that this option is dictated
+by the site configuration variable <i>listAllCals</i>. If calendar listing is disabled,
+no pull down menu will ever be used, an entry will be used instead.
+ </ul>
+Example:
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=month,block&header=custom&calendarselection=false&refresh=0">header=custom&calendarselection=false</a> &nbsp;&nbsp;&nbsp;
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=month,block&header=custom&calendarselection=entry&refresh=0">header=custom&calendarselection=entry</a> 
+
+<br>
+<br>
+<li> <b>nbar</b> or <b>navigationbar</b> or <b>navigationtable</b> -- This option is used to enable/disable the
+master navigation bar. It takes value <i>true</i>, <i>false</i> or  <i>mini</i>.
+<br> Example: 
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,block&refresh=0">
+nbar=true</a>&nbsp;&nbsp;&nbsp;
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,block&nbar=false&refresh=0">
+nbar=false</a>&nbsp;&nbsp;&nbsp;
+
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,block&nbar=mini&refresh=0">
+nbar=mini</a>&nbsp;&nbsp;&nbsp;
+
+<br>
+<br>
+<li> <b>listviewnavigation</b> -- This option selects one of the two navigation methods for
+list view. Choices are either <i>bar</i> or <i>monthtable</i>.<br>
+Example:
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,list3&listviewnavigation=bar&refresh=0">
+listviewnavigation=bar</a>&nbsp;&nbsp;&nbsp;
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,list3&listviewnavigation=month&refresh=0">
+listviewnavigation=monthtable</a>
+<br>
+<br>
+
+<li> <b>quickadd</b> -- This option turns the "quick add" button on/off. It take values <i>true</i> or <i>false</i>.
+The default value is <i>true</i>.
+<br>
+<br>
+
+<li> <b>clock</b> -- This option turns the digital "clock" on/off. It take values <i>true</i> or <i>false</i>.
+The default value is <i>true</i>.
+<br>
+<br>
+
+<li> <b>elink</b> -- This option selects the two possible links on the event titles. Choices are:
+<i>edit</i> or <i>detail</i>. This option only affects "block" and "list1" view.<br>
+Examples: 
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,block&listviewnavigation=bar&elink=edit&refresh=0">
+elink=edit</a>&nbsp;&nbsp;&nbsp;
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,block&listviewnavigation=bar&elink=detail&refresh=0">
+elink=detail</a>&nbsp;&nbsp;&nbsp;
+<br>
+<br>
+
+<li> <b>busytable</b> -- This option turns on/off the busy time table in block week view. Value is either 
+<i>true</i> or <i>false</i>. The default value is <i>true</i>.
+<br>
+Example:
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,block&busytable=true&refresh=0">
+busytale=true</a>&nbsp;&nbsp;&nbsp;
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=week,block&busytable=false&refresh=0">
+busytale=false</a>&nbsp;&nbsp;&nbsp;
+<br>
+<br>
+
+<li> <b>monthtable</b> -- This option turns on/off the navigation month table in block day view. Value is either 
+<i>true</i> or <i>false</i>. The default value is <i>true</i>.
+<br>
+Example:
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=day,block&monthtable=true&refresh=0">
+monthtable=true</a>&nbsp;&nbsp;&nbsp;
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=day,block&monthtable=false&refresh=0">
+monthtale=false</a>&nbsp;&nbsp;&nbsp;
+<br>
+<br>
+
+<li> <b>edit</b> -- This option turns on/off editting. Values is either
+<i>true</i> or <i>false</i>. The default value is <i>true</i>. If set to <i>false</i>, all
+editing links are removed from the calendar display.
+<br>
+Example:&nbsp;
+<a href="http://webcal.ma.utexas.edu/webcal/wcal?calendar=Demo&anonymous=1&view=month,block&monthtable=true&edit=false&refresh=0">
+edit=false</a>&nbsp;&nbsp;&nbsp;
+<br>
+<br>
+
+</ul>
+
+
+
+<br><br><br><br>
+<a href="mailto:mzou@math.utexas.edu" style="text-decoration:none">
+<font size=2 color=#999999>
+</font></a>
+<br><font color=#aaaaaa size=1>Last updated:  Fri, 14 Nov 2003 12:35:37 CDT</font>
+</td></tr></table>
+</BODY>
+<a href="http://directory.mozilla.org/Computers/Programming/Languages/Perl/WWW/Scripts/Calendars/" target=domz><img src="img/cool0.gif" width=140 height=45 border=1 align=right alt="D M O Z listing" title="D M O Z listing"></a><a href="http://www.math.utexas.edu/mailman/listinfo/webcalendar"><img src="img/mailman.jpg" width=148 height=45 border=1 align=right alt="Mailing list" title="Mailing List"></a><a href="http://freshmeat.net/projects/web-calendar" target=fmeat><img src="img/freshmeat.gif" width=140 height=45 border=1 align=right alt="On Freshmeat" title="On Freshmeat"></a>
+</HTML>

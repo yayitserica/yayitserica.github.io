@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+     <link rel="shortcut icon" href="myIcon.ico" type="image/x-icon">
+    <title>About Erica</title>
+
+  <head>
+    <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+    <link rel="stylesheet" href="aboutErica.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div class="nav">
+      <div class="container">
+        <ul class="pull-left">
+          <li><a href="#">About Erica</a></li>
+          <li><a href="https://calendar.google.com/calendar/embed?title=Erica%20Millado%27s%20Tutoring%20Calendar&amp;showPrint=0&amp;height=600&amp;wkst=1&amp;hl=en&amp;bgcolor=%23ffffff&amp;src=msmillado%40gmail.com&amp;color=%235229A3&amp;ctz=America%2FNew_York" target="_blank">Schedule</a></li>
+        </ul>
+        <ul class="pull-right">
+          <li id="favoritefoods"><a href="#">Guess My Favorite Foods</a></li>
+          <li><a href="mailto:erica@yayitserica.com?Subject=Hello,%20It's%20Me" target="_top">Contact Me</a></li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Ten Fast Facts about Erica</h1>
+          <ol>
+              <li>Erica moved to NYC in 2004.</li>
+              <li>Erica has traveled to over 30 countries.</li>
+              <li>Erica likes learning new things.  Last year, she learned Swift.</li>
+              <li>Erica taught middle and high school math for 11 years.</li>
+              <li>Erica once washed the rapper Coolio's car for $5.</li>
+              <li>Erica has a few favorite quotes.  One of them is, "A goal without a plan is just a wish."</li>
+              <li>Erica's favorite app at the moment is Pause, a focus and meditation app.</li>
+              <li>Erica is a NYCFC fan.  Her favorite player is David Villa.  NY is Blue and White!</li>
+              <li>Erica went to Cuba (August 2016).</li>
+              <li>Erica got paid $700 to shave part of her head for a hair study.</li>
+          </ol>
+        
+        
+     
+            <script>
+       
+        $("#favoritefoods").mouseover(function() {
+           $("#favoritefoods").html("It's hard-shelled tacos!");
+       });
+        $("#favoritefoods").mouseout(function(){
+        $("#favoritefoods").html("GUESS MY FAVORITE FOODS").css({"font-weight": "bold", "color": "#5a5a5a"});
+    });
+        
+        /*$(".learn-more").click(function() {
+            alert("Sorry, Erica hasn't figured out how to link this to a different page yet!");
+        });*/
+                
+        
+        
+                
+    </script>
+  </body>
+</html>

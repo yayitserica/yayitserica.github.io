@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+     <link rel="shortcut icon" href="myIcon.ico" type="image/x-icon">
+    <title>Yay It's Erica!</title>
+
+  <head>
+    <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+    <link rel="stylesheet" href="stylesheet.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div class="nav">
+      <div class="container">
+        <ul class="pull-left">
+          <li><a href="aboutErica.html " target="_blank">About Erica</a></li>
+          <li><a href="https://calendar.google.com/calendar/embed?title=Erica%20Millado%27s%20Tutoring%20Calendar&amp;showPrint=0&amp;height=600&amp;wkst=1&amp;hl=en&amp;bgcolor=%23ffffff&amp;src=msmillado%40gmail.com&amp;color=%235229A3&amp;ctz=America%2FNew_York" target="_blank">Schedule</a></li>
+        </ul>
+        <ul class="pull-right">
+          <li id="favoritefoods"><a href="#">Guess My Favorite Foods</a></li>
+          <li><a href="mailto:erica@yayitserica.com?Subject=Hello,%20It's%20Me" target="_top">Contact Me</a></li>
+          <li><a href="https://medium.com/yay-its-erica" target="_top">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Take a look at what I'm working on.</h1>
+        <p>iOS Developer, New Yorker, Taco Lover.</p>
+        
+      </div>
+    </div> 
+
+    <div class="bottomheader">
+        <div class="container">
+          <h2>What I Do</h2>
+          <p>I build iOS apps, I love hard-shelled tacos, and I tutor mathematics.</p>
+          
+    <div class="row">
+         <div class="col-md-4">
+         <div class="thumbnail">
+            <img class="coffeecups" src="theGrindLogo.png">
+            </div>
+         </div>
+         
+         <div class="col-md-4">
+         <div class="thumbnail">
+            <img src="logo_225x225.png">
+            </div>
+        </div>
+         
+         <div class="col-md-4">
+         <div class="thumbnail">
+            <img src="tagAlong.png">
+            </div>
+        </div>
+    </div>
+         
+    <div class="learn-more">
+	  <div class="container">
+		<div class="row">
+	      <div class="col-md-4">
+			<h3>theGrindTimer</h3>
+			<p>Get on task with theGrindTimer to manage your productivity.</p>
+			<p><a href="https://itunes.apple.com/us/app/thegrindtimer/id1210577558?mt=8" target="_blank">Download from the App Store</a></p>
+	      </div>
+		  <div class="col-md-4">
+			<h3>UPK New York City</h3>
+			<p>The Universal Pre-K Finder for New York City app helps parents find universal pre-kindergarten schools in NYC.</p>
+			<p><a href="https://itunes.apple.com/us/app/upk/id1200317434?mt=8" target="_blank">Download from the App Store</a></p>
+		  </div>
+		  <div class="col-md-4">
+			<h3>Tag Along App</h3>
+			<p>Share a Meal with Someone</p>
+			<p><a href="https://itunes.apple.com/us/app/tag-along-have-lunch-friend!/id1186406085?mt=8" target="_blank">Download from the App Store</a></p>
+		  </div>
+	    </div>
+	  </div>
+	</div>
+            
+            <script>
+       
+        $("#favoritefoods").mouseover(function() {
+           $("#favoritefoods").html("It's hard-shelled tacos!");
+       });
+        $("#favoritefoods").mouseout(function(){
+        $("#favoritefoods").html("GUESS MY FAVORITE FOODS").css({"font-weight": "bold", "color": "#5a5a5a"});
+    });
+        
+        /*$(".learn-more").click(function() {
+            alert("Sorry, Erica hasn't figured out how to link this to a different page yet!");
+        });*/
+                
+        
+        
+                
+    </script>
+  </body>
+</html>

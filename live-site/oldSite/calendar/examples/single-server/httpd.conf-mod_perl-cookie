@@ -1,0 +1,25 @@
+#
+# section relevent to webcal and mod_perl
+#
+# WebCalendar is installed in /virtual/www/webcal/bin/
+#
+# webcal is accessed via url /y/x
+#
+Alias /y/  "/virtual/www/webcal/bin/"
+<Location /y>
+    SetHandler  perl-script
+    PerlHandler Apache::Registry
+    PerlSendHeader On
+    Options +ExecCGI
+</Location>
+
+#
+# webcal icons is accessed via url /i/
+#
+Alias /i/ "/virtual/www/htdocs/i/"
+<Directory "/virtual/www/htdocs/i">
+    Options Indexes MultiViews
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
