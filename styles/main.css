@@ -34,6 +34,9 @@ h2, .display-3{
   font-family: 'Montserrat', sans-serif;
   text-align: center;
 }
+.col-sm-3 {
+  text-align: center;
+}
 p {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
