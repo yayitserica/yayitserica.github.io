@@ -44,6 +44,7 @@ li {
 .btn-primary {
   background-color:  #00A7B5;
   border-color: #00A7B5;
+  text-align: center;
 }
 .about-erica, #email {
   color: #00A7B5;
@@ -51,6 +52,7 @@ li {
 .btn-primary:hover {
   background-color: #8A8A8A;
   border-color: #8A8A8A;
+  text-align: center;
 }
 .about-erica:hover, #email:hover {
   color: #8A8A8A;
