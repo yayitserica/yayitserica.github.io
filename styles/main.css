@@ -37,6 +37,9 @@ h2, .display-3{
 .col-sm-3 {
   text-align: center;
 }
+.col-sm-2 {
+  text-align: center;
+}
 p {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
